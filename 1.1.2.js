@@ -69,11 +69,13 @@ input.forEach(function(i) {
     }
 })
 
-console.log(`1::::: H: ${horizontal}`, `V: ${vertical}`, `D: ${Math.abs(vertical) + Math.abs(horizontal)}`)
 
 const result2 = points.map(c => points.filter(x => c[0] === x[0] && c[1] === x[1])).filter(x => x.length === 2)
-console.log('2:::::', Math.abs(result2[0][0][0]) + Math.abs(result2[0][0][1]))
 
 function addPoints(x, y) {
     points.push([x, y])
 }
+
+console.log(`1::::: H: ${horizontal}`, `V: ${vertical}`, `D: ${Math.abs(vertical) + Math.abs(horizontal)}`)
+console.log('2:::::', Math.abs(result2[0][0][0]) + Math.abs(result2[0][0][1]))
+
