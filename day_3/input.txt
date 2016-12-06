@@ -1,7 +1,4 @@
-#!/usr/bin/env node
-'use strict'
-
-const raw = `    4   21  894
+    4   21  894
   419  794  987
   424  797  125
   651  305  558
@@ -1908,21 +1905,4 @@ const raw = `    4   21  894
    50   94    8
   554  421  618
   338  274  638
-  346  188  656`
-
-const inp = raw.split('\n')
-
-console.log(inp.filter(isTriangle).length)
-
-function isTriangle(tr) {
-    const t = tr.split(' ').filter(Boolean)
-    const first = parseInt(t[1]) + parseInt(t[2]) > parseInt(t[0])
-    const second = parseInt(t[2]) + parseInt(t[0]) > parseInt(t[1])
-    const third = parseInt(t[0]) + parseInt(t[1]) > parseInt(t[2])
-
-    if (first && second && third) {
-
-        return true
-    }
-    return false
-}
+  346  188  656
