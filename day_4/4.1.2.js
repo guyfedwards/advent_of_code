@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict'
 const fs = require('fs')
+const { countLetters, stripDashes } = require('../utils')
 
 const raw = fs.readFileSync(process.argv[2], 'utf8')
 
@@ -12,27 +13,11 @@ const getId = s => s.slice(-10, -7)
 
 const getName = s => s.slice(0, -11)
 
-const stripDashes = s => s.replace(/-/g, '')
-
 const createTuples = result => Object.keys(result).map(l => [l, result[l]])
 
 const sortTuples = tuples => tuples.slice().sort(compare).reverse()
 
 const getCorrectChecksum = arr => arr.slice(0, 5).map(v => v[0]).join('')
-
-function countLetters(string) {
-    const result = {}
-
-    string.split('').map(l => {
-        if (result[l] === undefined) {
-            result[l] = 1
-        } else {
-            result[l] += 1
-        }
-    })
-
-    return result
-}
 
 function compare(a, b) {
     if (a[1] < b[1]) {
