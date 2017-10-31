@@ -11,8 +11,8 @@ const numbers = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 let row = 1
 let col = 1
 
-function getKey() {
-    return numbers[row][col]
+function getKey(r, c) {
+    return numbers[r][c]
 }
 
 function move(dir) {
@@ -42,7 +42,7 @@ function move(dir) {
 
 const result = ins.map(line => {
     line.split('').map(i => move(i))
-    return getKey()
+    return getKey(row, col)
 })
 
 console.log(result)
