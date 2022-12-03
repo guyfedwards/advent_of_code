@@ -21,33 +21,30 @@ func partOne(rules []string) (result int) {
 			continue
 		}
 		parts := strings.Split(rule, "contain")
-		key := parts[0]
+		containingBag := parts[0]
 
 		children := regexp.MustCompile(`(\d)\s([\w\s]+bag)`).FindAllStringSubmatch(parts[1], -1)
-		// children := strings.Split(parts[1], ",")
-		fmt.Println(key, "=====", children)
+		fmt.Println(containingBag, "=====", children)
+
 		for _, child := range children {
 			i, err := strconv.Atoi(child[1])
 			check(err)
 
-			if rulesMap[key] == nil {
-				rulesMap[key] = make(map[string]int)
+			if rulesMap[containingBag] == nil {
+				rulesMap[containingBag] = make(map[string]int)
 			}
 
-			rulesMap[key][child[2]] = i
-			// for _, c := range child {
-			// 	fmt.Printf("%+v\n",  c)
-			// }
+			rulesMap[containingBag][child[2]] = i
 		}
 
 		// fmt.Println(parts)
 	}
 
 	for k, v := range rulesMap {
+
 		fmt.Println(k, v)
 	}
 
-	// key := s
 	return result
 }
 
