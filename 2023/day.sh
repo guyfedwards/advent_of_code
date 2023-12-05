@@ -16,7 +16,7 @@ import (
 
 func main() {
   c, _ := os.ReadFile(\"./input.txt\")
-  cc := strings.Split(string(c), \"\n\")
+  cc := strings.Split(strings.TrimSpace(string(c)), \"\n\")
 
   part1(cc)
   part2(cc)
