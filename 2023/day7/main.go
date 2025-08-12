@@ -85,61 +85,69 @@ func part1(cc []string) {
 func (h *Hand) getHandWeightJokers() int {
 	var weight []string
 	js := h.counts["J"]
-	jss := js
+	jsused := 0
 
-	for k, c := range h.counts {
+	for k, v := range h.counts {
 		// add the jokers as wildcards
-		var v int
-		v = c + js
+		// var v int
+		// v = c + js
 		if k == "J" {
-			v = v - 1
+			// v = v - 1
+			continue
 		}
 
-		fmt.Printf("VVV: v: %d c: %d\n", v, c)
+		fmt.Printf("VVV: v: %d\n", v)
+		fmt.Println(h.cards, h.bid, weight)
 
-		if v == 5 {
+		if v == 5 || v+js == 5 {
 			weight = append(weight, "five")
-			fmt.Println(h.cards, h.bid, weight)
 			break
 		}
 
-		if v == 4 {
+		if v == 4 || v+js == 4 {
 			weight = append(weight, "four")
-			fmt.Println(h.cards, h.bid, weight)
 			continue
 		}
 
-		if contains(weight, "onepair") && v == 3 && c-js > 2 {
-			fmt.Println(h.cards, h.bid, weight)
-
+		if (contains(weight, "onepair") && (v == 3 || v+js-jsused == 3)) || (contains(weight, "three") && (v == 2 || v+js-jsused == 2)) {
 			weight = append(weight, "full")
 			continue
 		}
 
-		if contains(weight, "three") && v >= 2 && c-js > 0 {
-			fmt.Println(h.cards, h.bid, weight)
+		// if contains(weight, "onepair") && v == 3 {
+		// 	fmt.Println(h.cards, h.bid, weight)
 
-			weight = append(weight, "full")
-			continue
-		}
+		// 	weight = append(weight, "full")
+		// 	continue
+		// }
 
-		if v == 3 {
+		// if contains(weight, "three") && v >= 2 {
+		// 	fmt.Println(h.cards, h.bid, weight)
+
+		// 	weight = append(weight, "full")
+		// 	continue
+		// }
+
+		if v == 3 || v+js == 3 {
 			weight = append(weight, "three")
-			fmt.Println(h.cards, h.bid, weight)
-			jss = jss - c
+			if v != 3 {
+				jsused = jsused + (js - v)
+			}
+
 			continue
 		}
 
-		if contains(weight, "onepair") && v == 2 {
+		if contains(weight, "onepair") && (v == 2 || v+js-jsused == 2) {
 			weight = append(weight, "twopair")
-			fmt.Println(h.cards, h.bid, weight)
 			continue
 		}
 
-		if v == 2 {
+		if v == 2 || v+js == 2 {
+			if v != 2 {
+				jsused = jsused + (js - v)
+			}
+
 			weight = append(weight, "onepair")
-			fmt.Println(h.cards, h.bid, weight)
-			jss = jss - c
 			continue
 		}
 	}
